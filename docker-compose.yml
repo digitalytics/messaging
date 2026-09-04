@@ -1,0 +1,42 @@
+services:
+  mongo:
+    image: mongo:6
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "127.0.0.1:27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./managecancellations-api-master
+    env_file:
+      - ./managecancellations-api-master/.env
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "8033:8033"
+    restart: unless-stopped
+
+  admin:
+    build:
+      context: ./managecancellations-admin-main
+      args:
+        VITE_BASE_URL: ${VITE_BASE_URL:-http://localhost:8033/}
+        VITE_APP_TITLE: ${VITE_APP_TITLE:-Athena EHR Backoffice}
+        VITE_PORT: ${VITE_PORT:-8034}
+    depends_on:
+      - api
+    ports:
+      - "8034:8034"
+    restart: unless-stopped
+
+volumes:
+  mongo_data:

@@ -1,0 +1,35 @@
+{
+  "name": "ehr-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prepush": "npm run prod",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,tsx,ts}\"",
+    "prod": "npm run pretty && npm run lint"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^8.2.1",
+    "@fastify/multipart": "^7.5.0",
+    "@fastify/swagger": "^8.3.1",
+    "@fastify/swagger-ui": "^1.7.0",
+    "aws-sdk": "^2.1351.0",
+    "axios": "^1.6.8",
+    "dotenv": "^16.0.3",
+    "fast-csv": "^4.3.6",
+    "fastify": "^4.16.0",
+    "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
+    "mongoose": "^7.0.3",
+    "nodemailer": "^9.0.6",
+    "qs": "^6.12.0",
+    "underscore": "^1.13.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.37.0",
+    "prettier": "^2.8.7"
+  }
+}
