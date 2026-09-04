@@ -57,6 +57,24 @@ const seedAdminUser = async () => {
                     "is_delete": true,
                     "is_add": true
                 }
+            }, {
+                "title": "Waiting List",
+                "code": "waitingList",
+                "data": {
+                    "is_view": true,
+                    "is_edit": true,
+                    "is_delete": true,
+                    "is_add": true
+                }
+            }, {
+                "title": "Notification",
+                "code": "notification",
+                "data": {
+                    "is_view": true,
+                    "is_edit": true,
+                    "is_delete": true,
+                    "is_add": true
+                }
             }]
         }
         let existingAccess = await Access.findOne({ roleID: existingRole?._id });
